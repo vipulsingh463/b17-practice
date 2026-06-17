@@ -20,7 +20,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
+        workingDirectory: '$(Build.SourcesDirectory)'
         backendServiceArm: 'practice'
         backendAzureRmResourceGroupName: 'rg-web'
         backendAzureRmStorageAccountName: 'bhumistg'
@@ -32,14 +32,14 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'validate'
-        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
+        workingDirectory: '$(Build.SourcesDirectory)'
 
     - task: TerraformTask@5
       displayName: "Terraform Plan"
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
+        workingDirectory: '$(Build.SourcesDirectory)'
         environmentServiceNameAzureRM: 'practice'
 
 
@@ -58,7 +58,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
+        workingDirectory: '$(Build.SourcesDirectory)'
         backendServiceArm: 'practice'
         backendAzureRmResourceGroupName: 'rg-web'
         backendAzureRmStorageAccountName: 'bhumistg'
@@ -70,5 +70,5 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        workingDirectory: '$(Build.SourcesDirectory)/YOUR_FOLDER'
+        workingDirectory: '$(Build.SourcesDirectory)'
         environmentServiceNameAzureRM: 'practice'
