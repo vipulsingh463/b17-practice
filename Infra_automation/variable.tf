@@ -1,3 +1,5 @@
+# Resource Groups 
+
 variable "rgs" {
   type = map(object({
     rg_name  = string
@@ -5,6 +7,7 @@ variable "rgs" {
   }))
 }
 
+# Virtual Networks 
 variable "vnets" {
   type = map(object({
     vnet_name     = string
@@ -19,6 +22,8 @@ variable "vnets" {
   }))
 }
 
+
+# Public Ips 
 variable "pips" {
   type = map(object({
     pip_name          = string
@@ -28,6 +33,8 @@ variable "pips" {
   }))
 }
 
+
+# Virtual Linux Machine 
 variable "vms" {
   type = map(object({
     nic_name       = string
@@ -47,6 +54,7 @@ variable "vms" {
 }
 
 
+# SQL _ server 
 variable "sql_server" {
   type = map(object({
     sql_name    = string
@@ -57,6 +65,7 @@ variable "sql_server" {
   }))
 }
 
+# Sql Database
 variable "sql_database" {
   type = map(object({
     sql_db_name = string
@@ -66,4 +75,15 @@ variable "sql_database" {
     server_key  = string
   }))
 }
+
+# # STorag Accounts 
+# variable "stg" {
+#   type = map(object({
+#     stg_name                 = string
+#     location                 = string
+#     account_tier             = string
+#     account_replication_type = string
+#     rg_name                  = string
+#   }))
+# }
 
