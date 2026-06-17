@@ -1,0 +1,50 @@
+trigger: 
+- main 
+
+pool: todoapp
+
+stages:
+- stage:
+  jobs:
+  - job: 
+    displayName: "terraform init"
+    steps:
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'practice'
+        backendAzureRmResourceGroupName: 'rg-web'
+        backendAzureRmStorageAccountName: 'bhumistg'
+        backendAzureRmContainerName: 'mussorie'
+        backendAzureRmKey: 'terraform.tfstate'
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        environmentServiceNameAzureRM: 'practice'
+
+- stage: 
+  jobs:
+  - job: 
+    dependsOn: "terraform init"
+    displayName: "terraform plan"
+    steps:
+      - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      backendServiceArm: 'practice'
+      backendAzureRmResourceGroupName: 'rg-web'
+      backendAzureRmStorageAccountName: 'bhumistg'
+      backendAzureRmContainerName: 'mussorie'
+      backendAzureRmKey: 'terraform.tfstate'
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      environmentServiceNameAzureRM: 'practice'
