@@ -1,74 +1,21 @@
-trigger:
-- main
+trigger: 
+- main 
 
-pool:
-  name: todoapp
+pool: todoapp
 
-stages:
-
-# ===================== STAGE 1 =====================
-- stage: TerraformInit
-  displayName: "Terraform Init & Validate & Plan"
-  jobs:
-
-  - job: InitJob
-    displayName: "Terraform Init Job"
-    steps:
-
-    - task: TerraformTask@5
-      displayName: "Terraform Init"
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(Build.SourcesDirectory)/Infra_automation'
-        backendServiceArm: 'practice'
-        backendAzureRmResourceGroupName: 'rg-web'
-        backendAzureRmStorageAccountName: 'bhumistg'
-        backendAzureRmContainerName: 'mussorie'
-        backendAzureRmKey: 'terraform.tfstate'
-
-    - task: TerraformTask@5
-      displayName: "Terraform Validate"
-      inputs:
-        provider: 'azurerm'
-        command: 'validate'
-        workingDirectory: '$(Build.SourcesDirectory)'
-
-    - task: TerraformTask@5
-      displayName: "Terraform Plan"
-      inputs:
-        provider: 'azurerm'
-        command: 'plan'
-        workingDirectory: '$(Build.SourcesDirectory)/Infra_automation'
-        environmentServiceNameAzureRM: 'practice'
-
-
-# ===================== STAGE 2 =====================
-- stage: TerraformApply
-  displayName: "Terraform Apply Stage"
-  dependsOn: TerraformInit
-  jobs:
-
-  - job: ApplyJob
-    displayName: "Terraform Apply Job"
-    steps:
-
-    - task: TerraformTask@5
-      displayName: "Terraform Init (Apply)"
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(Build.SourcesDirectory)'
-        backendServiceArm: 'practice'
-        backendAzureRmResourceGroupName: 'rg-web'
-        backendAzureRmStorageAccountName: 'bhumistg'
-        backendAzureRmContainerName: 'mussorie'
-        backendAzureRmKey: 'terraform.tfstate'
-
-    - task: TerraformTask@5
-      displayName: "Terraform Plan (Apply Stage)"
-      inputs:
-        provider: 'azurerm'
-        command: 'plan'
-        workingDirectory: '$(Build.SourcesDirectory)'
-        environmentServiceNameAzureRM: 'practice'
+steps:
+- task: TerraformInstaller@1
+  displayName: "Terraform install"
+  inputs:
+    terraformVersion: 'latest'
+- task: TerraformTask@5
+  displayName: "terraform init"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_automation'
+    backendServiceArm: 'practice'
+    backendAzureRmResourceGroupName: 'rg-web'
+    backendAzureRmStorageAccountName: 'bhumistg'
+    backendAzureRmContainerName: 'mussorie'
+    backendAzureRmKey: 'terraform.tfsate'
