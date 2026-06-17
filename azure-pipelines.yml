@@ -39,7 +39,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        workingDirectory: '$(Build.SourcesDirectory)'
+        workingDirectory: '$(Build.SourcesDirectory)/Infra_automation'
         environmentServiceNameAzureRM: 'practice'
 
 
