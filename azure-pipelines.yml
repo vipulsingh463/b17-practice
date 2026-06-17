@@ -25,7 +25,6 @@ steps:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_automation'
-    commandOptions: 'fmt'
 - task: TerraformTask@5
   displayName: "terraform plan"
   inputs:
