@@ -19,3 +19,17 @@ steps:
     backendAzureRmStorageAccountName: 'bhumistg'
     backendAzureRmContainerName: 'mussorie'
     backendAzureRmKey: 'terraform.tfsate'
+- task: TerraformTask@5
+  displayName: "terraform validate"
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_automation'
+    commandOptions: 'fmt'
+- task: TerraformTask@5
+  displayName: "terraform plan"
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_automation'
+    environmentServiceNameAzureRM: 'practice'
