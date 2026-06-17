@@ -12,7 +12,7 @@ stages:
   jobs:
 
   - job: InitJob
-    displayName: "terraform init job"
+    displayName: "Terraform Init Job"
     steps:
 
     - task: TerraformTask@5
@@ -20,6 +20,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
+        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
         backendServiceArm: 'practice'
         backendAzureRmResourceGroupName: 'rg-web'
         backendAzureRmStorageAccountName: 'bhumistg'
@@ -31,12 +32,14 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'validate'
+        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
 
     - task: TerraformTask@5
       displayName: "Terraform Plan"
       inputs:
         provider: 'azurerm'
         command: 'plan'
+        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
         environmentServiceNameAzureRM: 'practice'
 
 
@@ -47,14 +50,15 @@ stages:
   jobs:
 
   - job: ApplyJob
-    displayName: "terraform apply job"
+    displayName: "Terraform Apply Job"
     steps:
 
     - task: TerraformTask@5
-      displayName: "Terraform Init (Apply Stage)"
+      displayName: "Terraform Init (Apply)"
       inputs:
         provider: 'azurerm'
         command: 'init'
+        workingDirectory: '$(Build.SourcesDirectory)/b17-practice'
         backendServiceArm: 'practice'
         backendAzureRmResourceGroupName: 'rg-web'
         backendAzureRmStorageAccountName: 'bhumistg'
@@ -62,8 +66,9 @@ stages:
         backendAzureRmKey: 'terraform.tfstate'
 
     - task: TerraformTask@5
-      displayName: "Terraform Plan"
+      displayName: "Terraform Plan (Apply Stage)"
       inputs:
         provider: 'azurerm'
         command: 'plan'
+        workingDirectory: '$(Build.SourcesDirectory)/YOUR_FOLDER'
         environmentServiceNameAzureRM: 'practice'
