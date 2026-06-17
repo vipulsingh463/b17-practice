@@ -20,7 +20,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(Build.SourcesDirectory)'
+        workingDirectory: '$(Build.SourcesDirectory)/Infra_automation'
         backendServiceArm: 'practice'
         backendAzureRmResourceGroupName: 'rg-web'
         backendAzureRmStorageAccountName: 'bhumistg'
