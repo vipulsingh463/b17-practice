@@ -53,5 +53,5 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_automation'
         environmentServiceNameAzureRM: 'practice'
