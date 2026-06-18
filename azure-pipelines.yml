@@ -49,19 +49,6 @@ stages:
         backendAzureRmStorageAccountName: 'bhumistg'
         backendAzureRmContainerName: 'mussorie'
         backendAzureRmKey: 'terraform.tfstate'
-    - task: AzureCLI@2
-      displayName: "Terraform Import RG"
-      inputs:
-        azureSubscription: 'practice'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/Infra_automation
-
-          terraform init
-
-          terraform import module.resource_group.azurerm_resource_group.resource_group["rg1"] \
-          /subscriptions/4ff5875c-9724-4b2e-8ac9-3c94a8388c9a/resourceGroups/rg-web || true    
     - task: TerraformTask@5
       inputs:
         provider: 'azurerm'
