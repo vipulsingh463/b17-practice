@@ -13,6 +13,8 @@ vnets = {
   rg_name = "rg-web"
 }
 
+}
+
 pips = {}
 
 vms = {}
